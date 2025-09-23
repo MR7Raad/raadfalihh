@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> raad falih </title>
+    <link rel="stylesheet" href="raad.css">
+    <link rel="icon" href="media/quraan.jpg">
+    <style>
+       <style>
+img{
+    border-radius: 10%;
+    border: 8px solid rgb(0, 0, 0);
+
+
+    }
+    body{
+      background-image:url(media/quraan.jpg);
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    h1{
+     color:#000000;
+     font-weight: bold; 
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    
+    }
+    
+    .big-box {
+    width: 400px;
+    height:;
+    background-color: rgb(205, 201, 201);
+    border-radius: 30px;
+    margin: 6px auto;
+     border: 10px solid #000000;
+     
+
+   }
+
+  
+
+  .big-button {
+  font-size: 20px; /* Adjust the font size as needed */
+  height: 70px;
+  width: 250px;
+  background-color: #ffffff;
+  color: white;
+  border: 5px solid #ffffff;
+  border-radius: 50px;
+  margin: 5px auto;
+}
+
+
+.button-link {
+  /* This will remove the default underline style of links */
+  text-decoration: none;
+
+}
+
+
+
+#my audioplayer{
+
+width: 20%;
+
+}
+
+ h2{
+     color:#000000;
+     font-weight: bold; 
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     border-bottom: 5px solid #000000;
+    
+    }
+
+
+
+    </style>
+</head>
+
+
+<body>
+    <center>
+
+<div class="big-box"
+    <div class="prayer-times-container">
+        <br>
+        <h1>أوقات الأذان اليوم</h1>
+        <p id="city">...</p>
+        <p>الفجر: <span id="fajr">...</span></p>
+        <p>الظهر: <span id="dhuhr">...</span></p>
+        <p>العصر: <span id="asr">...</span></p>
+        <p>المغرب: <span id="maghrib">...</span></p>
+        <p>العشاء: <span id="isha">...</span></p>
+    </div>
+
+    <script>
+        // احصل على موقع المستخدم
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+
+                // استدعاء الـ API باستخدام خط الطول والعرض
+                fetch(https://api.aladhan.com/v1/timings/${Math.floor(Date.now() / 1000)}?latitude=${lat}&longitude=${lng}&method=2)
+                    .then(response => response.json())
+                    .then(data => {
+                        const timings = data.data.timings;
+                        document.getElementById('fajr').textContent = timings.Fajr;
+                        document.getElementById('dhuhr').textContent = timings.Dhuhr;
+                        document.getElementById('asr').textContent = timings.Asr;
+                        document.getElementById('maghrib').textContent = timings.Maghrib;
+                        document.getElementById('isha').textContent = timings.Isha;
+                        // يمكنك أيضًا الحصول على اسم المدينة إذا كانت متاحة في الـ API
+                        // حاليًا، الـ API لا يوفر اسم المدينة مباشرة، لذا يمكنك استخدام خدمة أخرى للحصول عليها
+                        // أو كتابتها يدويًا
+                        document.getElementById('city').textContent = أوقات الصلاة لموقعك الحالي;
+                    })
+                    .catch(error => {
+                        console.error('حدث خطأ في جلب أوقات الصلاة:', error);
+                        document.getElementById('city').textContent = 'تعذر الحصول على أوقات الصلاة. يرجى المحاولة لاحقًا.';
+                    });
+            }, error => {
+                console.error('خطأ في الحصول على الموقع:', error);
+                document.getElementById('city').textContent = 'يرجى السماح بالوصول إلى موقعك للحصول على أوقات الصلاة.';
+            });
+        } else {
+            document.getElementById('city').textContent = 'متصفحك لا يدعم خاصية تحديد الموقع.';
+        }
+    </script>
+
+</body>
+</html>
