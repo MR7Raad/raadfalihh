@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> raad falih </title>
-    <link rel="stylesheet" href="raad.css">
     <link rel="icon" href="media/quraan.jpg">
     <style>
-       <style>
+
 img{
     border-radius: 10%;
     border: 8px solid rgb(0, 0, 0);
@@ -103,8 +102,8 @@ width: 20%;
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
 
-                // استدعاء الـ API باستخدام خط الطول والعرض
-                fetch(https://api.aladhan.com/v1/timings/${Math.floor(Date.now() / 1000)}?latitude=${lat}&longitude=${lng}&method=2)
+
+               fetch('https://api.aladhan.com/v1/timings/${Math.floor(Date.now() / 1000)}?latitude=${lat}&longitude=${lng}&method=2')
                     .then(response => response.json())
                     .then(data => {
                         const timings = data.data.timings;
@@ -116,7 +115,7 @@ width: 20%;
                         // يمكنك أيضًا الحصول على اسم المدينة إذا كانت متاحة في الـ API
                         // حاليًا، الـ API لا يوفر اسم المدينة مباشرة، لذا يمكنك استخدام خدمة أخرى للحصول عليها
                         // أو كتابتها يدويًا
-                        document.getElementById('city').textContent = أوقات الصلاة لموقعك الحالي;
+                        document.getElementById('city').textContent = 'أوقات الصلاة لموقعك الحالي';
                     })
                     .catch(error => {
                         console.error('حدث خطأ في جلب أوقات الصلاة:', error);
