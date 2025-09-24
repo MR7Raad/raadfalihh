@@ -8,7 +8,7 @@
     <style>
 
 img{
-    border-radius: 10%;
+    border-radius: 70%;
     border: 8px solid rgb(0, 0, 0);
 
 
@@ -82,17 +82,21 @@ width: 20%;
 
 <body>
     <center>
+<div class="big-box">
 
-<div class="big-box"
-    <div class="prayer-times-container">
+<img src="media/mecca2.jpg" height="300px" width="300px">
         <br>
         <h1>أوقات الأذان اليوم</h1>
         <p id="city">...</p>
-        <p>الفجر: <span id="fajr">...</span></p>
-        <p>الظهر: <span id="dhuhr">...</span></p>
-        <p>العصر: <span id="asr">...</span></p>
-        <p>المغرب: <span id="maghrib">...</span></p>
-        <p>العشاء: <span id="isha">...</span></p>
+        <h2>الفجر: <span id="fajr">...</span></h2>
+        <h2>الظهر: <span id="dhuhr">...</span></h2>
+        <h2>العصر: <span id="asr">...</span></h2>
+        <h2>المغرب: <span id="maghrib">...</span></h2>
+        <h2>العشاء: <span id="isha">...</span></h2>
+
+        <footer><h3>Mohammed Raad</h3>
+</h3> <h3> MR7 designer and programmer &copy;</h3>
+</footer>
     </div>
 
     <script>
@@ -103,7 +107,7 @@ width: 20%;
                 const lng = position.coords.longitude;
 
 
-               fetch('https://api.aladhan.com/v1/timings/${Math.floor(Date.now() / 1000)}?latitude=${lat}&longitude=${lng}&method=2')
+               fetch(`https://api.aladhan.com/v1/timings/${Math.floor(Date.now() / 1000)}?latitude=${lat}&longitude=${lng}&method=2`)
                     .then(response => response.json())
                     .then(data => {
                         const timings = data.data.timings;
@@ -129,6 +133,9 @@ width: 20%;
             document.getElementById('city').textContent = 'متصفحك لا يدعم خاصية تحديد الموقع.';
         }
     </script>
+
+    </center>
+
 
 </body>
 </html>
